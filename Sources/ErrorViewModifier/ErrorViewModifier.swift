@@ -24,7 +24,7 @@ struct ErrorDisplayModifier: ViewModifier {
 					.foregroundStyle(.red)
 					.padding()
 					.background()
-					.compositingGroup()
+					.clipShape(RoundedRectangle(cornerRadius: 8))
 					.shadow(radius: 8, x: 2, y: 2)
 					.padding(.top, 8)
 					.transition(.move(edge: .top))
@@ -53,5 +53,25 @@ struct ErrorDisplayModifier: ViewModifier {
 public extension View {
 	func showError(_ text: String, show: Binding<Bool>, displayTimeout: Double = 3, blurParent: Bool = false) -> some View {
 		self.modifier(ErrorDisplayModifier(text: text, showError: show, displayTimeout: displayTimeout, blurParent: blurParent))
+	}
+}
+struct ErrorViewTest: View {
+	@State private var toggle: Bool = false
+	var body: some View {
+		VStack {
+			Rectangle()
+			.foregroundStyle(Color.yellow)
+			.showError("Test", show: $toggle)
+			
+			Toggle(isOn: $toggle) {
+				Text("Show Error")
+			}
+		}
+	}
+}
+
+struct ErrorView_Preview: PreviewProvider {
+	static var previews: some View {
+		ErrorViewTest()
 	}
 }
