@@ -47,3 +47,9 @@ struct ErrorDisplayModifier: ViewModifier {
 		work.cancel()
 	}
 }
+
+public extension View {
+	func showError(_ text: String, show: Binding<Bool>, displayTimeout: Double = 3, blurParent: Bool = false) -> some View {
+		self.modifier(ErrorDisplayModifier(text: text, showError: show, displayTimeout: displayTimeout, blurParent: blurParent))
+	}
+}
