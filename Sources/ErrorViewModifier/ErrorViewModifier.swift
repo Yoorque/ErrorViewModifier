@@ -23,6 +23,8 @@ struct ErrorDisplayModifier: ViewModifier {
 					.bold()
 					.foregroundStyle(.red)
 					.padding()
+					.background()
+					.compositingGroup()
 					.shadow(radius: 8, x: 2, y: 2)
 					.padding(.top, 8)
 					.transition(.move(edge: .top))
